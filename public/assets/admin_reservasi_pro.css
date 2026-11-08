@@ -1,0 +1,198 @@
+/* CSS Khusus Manajemen Reservasi Pro - Jagara Eco Park */
+
+body { 
+    /* Menggunakan asset() di Blade biasanya mengarah ke public, pastikan path gambar benar */
+    background: url('../images/hero jagara.jpg') no-repeat center center fixed !important; 
+    background-size: cover !important; 
+    margin: 0; 
+    padding: 0; 
+    min-height: 100vh; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.master-container { 
+    background: rgba(255, 255, 255, 0.95); /* Sedikit transparan agar estetik */
+    margin: 30px auto; 
+    padding: 30px; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    width: 90%; 
+    max-width: 1200px; 
+}
+
+.filter-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 25px; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+}
+
+/* Tombol Kembali */
+.btn-kembali-master { 
+    text-decoration: none; 
+    color: #D2691E; 
+    background: white; 
+    font-weight: bold; 
+    border: 2px solid #D2691E; 
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-kembali-master:hover { 
+    background: #D2691E; 
+    color: white; 
+    transform: translateY(-2px);
+}
+
+/* Tabel Styling */
+#tabelData th {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+#tabelData td {
+    vertical-align: middle;
+}
+
+/* Badge Status */
+.badge { 
+    padding: 6px 14px; 
+    font-size: 11px; 
+    font-weight: 800; 
+    border-radius: 20px; 
+    text-transform: uppercase; 
+    border: 1px solid; 
+    display: inline-block; 
+}
+
+.menunggu { 
+    background: #fff3e0; 
+    color: #ef6c00; 
+    border-color: #ffe0b2; 
+}
+
+.diterima { 
+    background: #FFE4C4; 
+    color: #8B4513; 
+    border-color: #DEB887; 
+}
+
+.ditolak { 
+    background: #ffebee; 
+    color: #c62828; 
+    border-color: #ffcdd2; 
+}
+
+/* Tombol Aksi */
+.btn-action { 
+    cursor: pointer; 
+    padding: 8px 12px; 
+    border-radius: 6px; 
+    border: 1px solid; 
+    background: white; 
+    transition: 0.2s; 
+    text-decoration: none; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.btn-terima { color: #8B4513; border-color: #8B4513; }
+.btn-terima:hover { background: #8B4513; color: white; }
+
+.btn-tolak { color: #c62828; border-color: #c62828; }
+.btn-tolak:hover { background: #c62828; color: white; }
+
+.btn-cetak { color: #1565c0; border-color: #1565c0; }
+.btn-cetak:hover { background: #1565c0; color: white; }
+
+/* Dropdown Cetak */
+.dropdown-cetak { 
+    position: relative; 
+    display: inline-block; 
+}
+
+.dropdown-content { 
+    display: none; 
+    position: absolute; 
+    right: 0; 
+    background-color: #fff; 
+    min-width: 190px; 
+    box-shadow: 0px 8px 24px rgba(0,0,0,0.15); 
+    z-index: 999; /* Ditingkatkan agar tidak tertutup tabel */
+    border-radius: 8px; 
+    overflow: hidden; 
+    border: 1px solid #eee; 
+}
+
+.dropdown-content a { 
+    color: #444; 
+    padding: 12px 16px; 
+    text-decoration: none; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    font-size: 14px; 
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.dropdown-content a:last-child { border-bottom: none; }
+.dropdown-content a:hover { background-color: #FFF8DC; color: #8B4513; }
+.dropdown-cetak:hover .dropdown-content { display: block; }
+
+/* Statistik di Bawah */
+.footer-action-area {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 25px;
+    border-top: 2px dashed #eee;
+}
+
+.stat-box-small { 
+    color: white; 
+    padding: 12px 20px; 
+    border-radius: 10px; 
+    min-width: 140px; 
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.stat-box-small small { 
+    font-size: 10px; 
+    letter-spacing: 1px;
+    opacity: 0.8; 
+}
+
+.stat-box-small .number { 
+    font-size: 22px; 
+    font-weight: 800; 
+    margin-top: 2px;
+}
+
+/* Responsive & Print */
+@media print {
+    body { background: white !important; }
+    .no-print { display: none !important; }
+    .master-container { width: 100%; margin: 0; box-shadow: none; border: none; padding: 0; }
+    table { width: 100%; border: 1px solid #000; }
+    th, td { border: 1px solid #000 !important; }
+}
+
+.res-code {
+    display: block;
+    font-size: 11px;
+    color: #95a5a6;
+    font-family: 'Consolas', 'Monaco', monospace;
+    margin-top: 4px;
+}

@@ -1,0 +1,257 @@
+:root {
+    --coklat-utama: #00b4d8;
+    --coklat-tua: #0096c7;
+    --coklat-terang: #48cae4;
+    --beige-bg: #caf0f8;
+    --aksen-kuning: #F59E0B;
+    --text-dark: #263238;
+    --abu-teks: #607D8B;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('images/hero jagara.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 120px;
+    color: var(--text-dark);
+}
+
+.header-nav {
+    position: absolute;
+    top: 40px; 
+    left: 40px;
+    z-index: 1000;
+    display: none;
+}
+
+.hero-header .btn-back-header {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #F59E0B;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.hero-header .btn-back-header:hover {
+    background: #D97706;
+    transform: translateY(-50%) translateX(-5px);
+}
+
+.btn-back-master {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: 0.3s ease;
+}
+
+.btn-back-master:hover {
+    background: white;
+    color: var(--coklat-utama);
+    transform: translateX(-5px);
+}
+
+.hero-header {
+    color: white;
+    padding: 40px 20px; 
+    text-align: center;
+    margin: 10px 20px 0 20px; 
+    position: relative;
+    background: rgba(0, 180, 216, 0.7);
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+}
+
+.hero-header h1 { 
+    margin: 0; 
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.hero-header p { 
+    opacity: 0.9; 
+    margin: 8px auto 0; 
+    font-size: 1rem;
+    max-width: 600px;
+    line-height: 1.4;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.wahana-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.card-wahana-master {
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(139, 69, 19, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.card-wahana-master:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(139, 69, 19, 0.12);
+}
+
+.card-img-box {
+    width: 100%;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tag-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.tag-gratis { 
+    background: #e0f2fe; 
+    color: var(--coklat-utama); 
+    border: 1px solid var(--coklat-utama); 
+}
+
+.tag-populer { 
+    background: var(--aksen-kuning); 
+    color: #333; 
+}
+
+.card-content {
+    padding: 30px;
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.card-content p {
+    color: var(--abu-teks);
+    font-size: 1rem;
+    margin: 15px 0 25px;
+    line-height: 1.6;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px dashed #FFF8E7;
+    padding-top: 20px;
+}
+
+.price-box .amount {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--coklat-utama);
+    white-space: nowrap;
+}
+
+.price-box .label {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.icon-circle {
+    width: 45px;
+    height: 45px;
+    background: var(--beige-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--coklat-utama);
+    font-size: 1.2rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-reserve {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--coklat-utama);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.btn-reserve:hover {
+    background: var(--coklat-tua);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+}
+
+@media (max-width: 768px) {
+    .hero-header { 
+        margin: 15px; 
+        padding: 40px 15px; 
+        border-radius: 30px; 
+    }
+    .hero-header h1 { 
+        font-size: 1.8rem; 
+    }
+    .header-nav { 
+        top: 30px; 
+        left: 30px; 
+    }
+}
