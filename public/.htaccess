@@ -18,4 +18,38 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+</IfModule>
+
+# ============================================================
+# [KEAMANAN] Security HTTP Headers - Jagara Eco Park
+# Diterapkan sesuai OWASP Secure Headers Project
+# Referensi: https://owasp.org/www-project-secure-headers/
+# ============================================================
+
+<IfModule mod_headers.c>
+    # HSTS: Paksa HTTPS selama 2 tahun, termasuk subdomain
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+    # Cegah Clickjacking - iframe hanya dari domain sendiri
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Cegah MIME-type sniffing attack
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Filter XSS bawaan browser (legacy support)
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Batasi informasi referrer untuk privasi pengguna
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Batasi akses fitur browser sensitif
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # CSP: Batasi sumber resource yang diizinkan
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://cdnjs.cloudflare.com https://unpkg.com https://www.google.com/maps https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com/maps; connect-src 'self';"
+
+    # Sembunyikan versi server (security through obscurity)
+    Header always unset X-Powered-By
+    Header always unset Server
 </IfModule>
