@@ -142,7 +142,7 @@ class ReservationService
             }
         }
 
-        $ext = strtolower($file->getClientOriginalExtension());
+        $ext = strtolower($file->getMimeType() === 'image/png' ? 'png' : 'jpg');
         $filename = 'BUKTI_' . $kodeReservasi . '_' . time() . '.' . $ext;
         $file->move($targetDir, $filename);
 

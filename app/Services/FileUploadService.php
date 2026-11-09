@@ -24,7 +24,13 @@ class FileUploadService
         }
 
         if ($file) {
-            $nama_gambar = uniqid('fasilitas_') . '.' . $file->getClientOriginalExtension();
+            // [KEAMANAN] Gunakan getMimeType() bukan getClientOriginalExtension()
+            // getClientOriginalExtension() bisa dimanipulasi attacker dengan rename file
+            // getMimeType() membaca isi file sesungguhnya (lebih aman)
+            $mimeToExt = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/gif' => 'gif', 'image/webp' => 'webp'];
+            $mime = $file->getMimeType();
+            $ext = $mimeToExt[$mime] ?? 'jpg'; // default jpg jika tidak dikenali
+            $nama_gambar = uniqid('fasilitas_') . '_' . time() . '.' . $ext;
             $file->move($dest, $nama_gambar);
             return $nama_gambar;
         }
@@ -51,7 +57,7 @@ class FileUploadService
             }
         }
 
-        $ext = strtolower($file->getClientOriginalExtension());
+        $ext = strtolower($file->getMimeType() === 'image/png' ? 'png' : 'jpg');
         $filename = 'BUKTI_' . $kodeReservasi . '_' . time() . '.' . $ext;
         $file->move($targetDir, $filename);
 
