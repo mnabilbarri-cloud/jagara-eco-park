@@ -1,0 +1,107 @@
+# ============================================================
+# [KEAMANAN] .htaccess Jagara Eco Park — Security Headers
+# ============================================================
+
+# ✅ Aktifkan mod_rewrite
+Options -Indexes
+Options -MultiViews
+
+# ============================================================
+# [KEAMANAN 1] Sembunyikan listing direktori
+# ============================================================
+# Options -Indexes sudah di atas
+
+# ============================================================
+# [KEAMANAN 2] Force HTTPS (Redirect HTTP → HTTPS)
+# ============================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect semua HTTP ke HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Handle Authorization header (untuk shared hosting)
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# ============================================================
+# [KEAMANAN 3] Security HTTP Headers
+# ============================================================
+<IfModule mod_headers.c>
+    # HTTP Strict Transport Security (HSTS)
+    # max-age=63072000 = 2 tahun, paksa browser selalu pakai HTTPS
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+    # Cegah Clickjacking — halaman tidak bisa di-embed di iframe situs lain
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Cegah MIME-type sniffing — browser tidak boleh nebak tipe file
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Aktifkan XSS filter bawaan browser (untuk browser lama)
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy — jangan kirim URL asal ke situs lain
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy — nonaktifkan akses ke sensor hardware yang tidak perlu
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # Content Security Policy — batasi sumber resource yang diizinkan
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; frame-src 'none'; connect-src 'self';"
+
+    # Sembunyikan informasi server (versi PHP, Apache, dll.)
+    Header always unset X-Powered-By
+    Header always unset Server
+
+    # Cegah caching data sensitif di browser
+    <FilesMatch "\.(php)$">
+        Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header always set Pragma "no-cache"
+    </FilesMatch>
+</IfModule>
+
+# ============================================================
+# [KEAMANAN 4] Blokir akses ke file sensitif
+# ============================================================
+<FilesMatch "(^\.env|\.log|koneksi\.php|\.git|composer\.(json|lock)|package\.json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ============================================================
+# [KEAMANAN 5] Blokir akses langsung ke folder sensitif
+# ============================================================
+RedirectMatch 403 ^/\.git
+RedirectMatch 403 ^/\.env
+
+# ============================================================
+# [KEAMANAN 6] Batasi ukuran upload (10 MB max)
+# ============================================================
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 12M
+</IfModule>
+
+# ============================================================
+# [KEAMANAN 7] Blokir user agent mencurigakan (scanner/bot)
+# ============================================================
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|nmap|masscan|dirbuster|havij|acunetix|nessus|openvas|w3af|burpsuite) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ============================================================
+# [KEAMANAN 8] Halaman error custom (tidak bocorkan info server)
+# ============================================================
+ErrorDocument 400 /index.php
+ErrorDocument 403 /index.php
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php

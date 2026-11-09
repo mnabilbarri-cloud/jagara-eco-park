@@ -1,0 +1,11 @@
+# Folder duplikat (sub-folder yang sama dengan root)
+jagara-eco-park/
+
+# File gambar besar tidak perlu di git
+assets/images/istana balon_files/
+
+# Cache & temp
+*.log
+*.tmp
+Thumbs.db
+.DS_Store

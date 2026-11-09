@@ -1,0 +1,107 @@
+.table-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.table-admin {
+    width: 100%;
+    max-width: 1300px;   
+    margin: 0 auto;      
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.table-admin thead {
+    background: #2e7d32;
+}
+
+.table-admin th {
+    padding: 14px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+.table-admin th:last-child {
+    border-right: none;
+}
+
+.table-admin td {
+    padding: 14px 12px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eeeeee;
+    text-align: center;
+}
+
+.table-admin tr:last-child td {
+    border-bottom: none;
+}
+
+.table-admin tbody tr:hover {
+    background: #f5f7f6;
+}
+
+.table-admin img {
+    width: 90px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.action {
+    white-space: nowrap;
+}
+
+.action a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin: 0 3px;
+    display: inline-block;
+}
+
+/* Tombol Edit */
+.action a:first-child {
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+
+.action a:first-child:hover {
+    background: #2e7d32;
+    color: #fff;
+}
+
+/* Tombol Hapus */
+.action a:last-child {
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.action a:last-child:hover {
+    background: #c62828;
+    color: #fff;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.menunggu { background: #f9a825; }
+.diterima { background: #2e7d32; }
+.ditolak  { background: #c62828; }
